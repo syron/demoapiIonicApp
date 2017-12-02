@@ -8,11 +8,46 @@
 </ion-header>
 
 <ion-content padding>
-  <h3>Ionic Menu Starter</h3>
 
-  <p>
-    If you get lost, the <a href="http://ionicframework.com/docs/v2">docs</a> will show you the way.
-  </p>
+  <div *ngIf="menu == null">
+      <ion-spinner name="bubbles"></ion-spinner>
+  </div>
 
-  <button ion-button secondary menuToggle>Toggle Menu</button>
+  <div *ngIf="menu != null">
+    
+    <ion-item-group>
+      <div *ngFor="let week of menu.Weeks">
+        <ion-item-divider color="light">Week <b>{{week.WeekNumber}}</b></ion-item-divider>
+        <div *ngFor="let day of week.Days; let i = index">
+
+          <ion-item>
+            <span *ngIf="i == 0"><b>Monday ({{day.DayMenuDate}})</b></span>
+            <span *ngIf="i == 1"><b>Tuesday ({{day.DayMenuDate}})</b></span>
+            <span *ngIf="i == 2"><b>Wednesday ({{day.DayMenuDate}})</b></span>
+            <span *ngIf="i == 3"><b>Thursday ({{day.DayMenuDate}})</b></span>
+            <span *ngIf="i == 4"><b>Friday ({{day.DayMenuDate}})</b></span>
+
+            <p *ngFor="let dayMenu of day.DayMenus">
+              <b>{{dayMenu.MenuAlternativeName}}</b>:<br />{{dayMenu.MenuPresentation.DayMenuName}}
+            </p>
+          </ion-item>
+
+        </div>
+      </div>
+    </ion-item-group>
+
+    <!-- <li *ngFor="let week of menu.Weeks">
+      Week: {{week.WeekNumber}}
+      <ul>
+        <li *ngFor="let day of week.Days; let i = index">
+          <ul>
+            
+            <li *ngFor="let dayMenu of day.DayMenus">
+              {{dayMenu.MenuAlternativeName}}: {{dayMenu.MenuPresentation.DayMenuName}}
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </li> -->
+  </div>
 </ion-content>

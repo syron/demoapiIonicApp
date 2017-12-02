@@ -1,6 +1,6 @@
 {
   "name": "scaniaapidemoionic",
-  "app_id": "",
+  "app_id": "b2a31f95",
   "type": "ionic-angular",
   "integrations": {
     "cordova": {}
