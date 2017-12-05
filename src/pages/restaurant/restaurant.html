@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-navbar>
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>{{name}}</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content>
+   
+    <ion-item-group *ngIf="menu != null">
+      <div *ngFor="let week of menu.weeks">
+        <ion-item-divider color="light">Week <b>{{week.weekNumber}}</b></ion-item-divider>
+
+        <div *ngFor="let menu of week.menus; let i = index">
+
+          <ion-item>
+            <span *ngIf="i == 0"><b>Monday ({{menu.date}})</b></span>
+            <span *ngIf="i == 1"><b>Tuesday ({{menu.date}})</b></span>
+            <span *ngIf="i == 2"><b>Wednesday ({{menu.date}})</b></span>
+            <span *ngIf="i == 3"><b>Thursday ({{menu.date}})</b></span>
+            <span *ngIf="i == 4"><b>Friday ({{menu.date}})</b></span>
+
+            <p *ngFor="let meal of menu.meals">
+                <b>{{meal.alternativeName}}</b>:<br />{{meal.name}}
+              </p>
+          </ion-item>
+
+        </div>
+      </div>
+    </ion-item-group>
+</ion-content>

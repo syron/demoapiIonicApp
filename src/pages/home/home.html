@@ -3,19 +3,18 @@
     <button ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
     </button>
-    <ion-title>Home</ion-title>
+    <ion-title>Restaurants</ion-title>
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
-
-  <div *ngIf="menu == null">
-      <ion-spinner name="bubbles"></ion-spinner>
-  </div>
-
-  <div *ngIf="menu != null">
-    
-    <ion-item-group>
+<ion-content>
+   
+    <ion-list>
+      <button ion-item *ngFor="let restaurant of restaurants" (click)="restaurantChosen(restaurant.id, restaurant.name)">
+        {{ restaurant.name }}
+      </button> 
+    </ion-list>
+    <!-- <ion-item-group>
       <div *ngFor="let week of menu.Weeks">
         <ion-item-divider color="light">Week <b>{{week.WeekNumber}}</b></ion-item-divider>
         <div *ngFor="let day of week.Days; let i = index">
@@ -34,20 +33,5 @@
 
         </div>
       </div>
-    </ion-item-group>
-
-    <!-- <li *ngFor="let week of menu.Weeks">
-      Week: {{week.WeekNumber}}
-      <ul>
-        <li *ngFor="let day of week.Days; let i = index">
-          <ul>
-            
-            <li *ngFor="let dayMenu of day.DayMenus">
-              {{dayMenu.MenuAlternativeName}}: {{dayMenu.MenuPresentation.DayMenuName}}
-            </li>
-          </ul>
-        </li>
-      </ul>
-    </li> -->
-  </div>
+    </ion-item-group> -->
 </ion-content>
