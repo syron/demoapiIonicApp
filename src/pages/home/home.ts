@@ -9,9 +9,7 @@ import { RestaurantPage } from '../restaurant/restaurant';
   templateUrl: 'home.html'
 })
 export class HomePage {
-
-  restaurantUrl: string = 'http://scaniademoapi.azurewebsites.net/api/restaurants';
-  lunchMenuUrl: string = 'http://scaniademoapi.azurewebsites.net/api/lunch/';
+restaurantUrl: string = 'https://api.integration.devtest.aws.scania.com/lunch/1.0/restaurants';
   
   restaurants: any = null;
   menu: any = null;
@@ -21,7 +19,20 @@ export class HomePage {
   }
 
   callRestaurantEndpoint() {
-    this.http.get(this.restaurantUrl).map(res => res.json()).subscribe(data => {
+    var token = 'ab3085af-d43a-34e8-9782-cf0c235e26d5';
+
+    let headers: Headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + token);
+
+    let method = 'GET';
+    
+    let requestOptions: RequestOptions = new RequestOptions({
+      headers: headers,
+      method: method
+    });
+    
+
+    this.http.get(this.restaurantUrl, requestOptions).map(res => res.json()).subscribe(data => {
       console.log(data);
       this.restaurants = data;
     });

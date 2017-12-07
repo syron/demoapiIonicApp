@@ -8,7 +8,7 @@ import 'rxjs/add/operator/map';
   templateUrl: 'restaurant.html'
 })
 export class RestaurantPage {
-  lunchMenuUrl: string = 'http://scaniademoapi.azurewebsites.net/api/lunch/';
+  lunchMenuUrl: string = 'https://api.integration.devtest.aws.scania.com/lunch/1.0/lunch/';
   
   name: string;
   restaurantId: number = null;
@@ -22,7 +22,19 @@ export class RestaurantPage {
   }
 
   callLunchService(id: number) {
-    this.http.get(this.lunchMenuUrl + id.toString()).map(res => res.json()).subscribe(data => {
+    var token = 'ab3085af-d43a-34e8-9782-cf0c235e26d5';
+    
+    let headers: Headers = new Headers();
+    headers.append('Authorization', 'Bearer ' + token);
+
+    let method = 'GET';
+    
+    let requestOptions: RequestOptions = new RequestOptions({
+      headers: headers,
+      method: method
+    });
+
+    this.http.get(this.lunchMenuUrl + id.toString(), requestOptions).map(res => res.json()).subscribe(data => {
       this.menu = data;
     });
   }

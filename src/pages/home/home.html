@@ -10,8 +10,8 @@
 <ion-content>
    
     <ion-list>
-      <button ion-item *ngFor="let restaurant of restaurants" (click)="restaurantChosen(restaurant.id, restaurant.name)">
-        {{ restaurant.name }}
+      <button ion-item *ngFor="let restaurant of restaurants" (click)="restaurantChosen(restaurant.id, restaurant.displayName)">
+        {{ restaurant.displayName }}
       </button> 
     </ion-list>
     <!-- <ion-item-group>
