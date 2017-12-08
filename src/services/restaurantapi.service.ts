@@ -9,8 +9,8 @@ export class RestaurantApiService {
     private _lunchMenuUrl: string = 'https://api.integration.devtest.aws.scania.com/lunch/1.0/lunch/';
     private _tokenUrl: string = 'https://api.integration.devtest.aws.scania.com/token';
 
-    private _consumerKey: string = 'evE0u48rNAxxDw2Rl_YQHmKzQbEa';
-    private _consumerSecret: string = 'EVLWUbtbwi1zXLaMr3j3ixmvRgsa';
+    private _consumerKey: string = '*******';
+    private _consumerSecret: string = '*******';
 
     private _accessToken: string;
 
