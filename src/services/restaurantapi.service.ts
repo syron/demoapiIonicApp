@@ -6,7 +6,9 @@ import { Observable } from 'rxjs/Observable';
 export class RestaurantApiService {
 
     private _restaurantsUrl: string = 'https://api.integration.devtest.aws.scania.com/lunch/1.0/restaurants';
+    private _lunchMenuUrl: string = 'https://api.integration.devtest.aws.scania.com/lunch/1.0/lunch/';
     private _tokenUrl: string = 'https://api.integration.devtest.aws.scania.com/token';
+
     private _consumerKey: string = 'evE0u48rNAxxDw2Rl_YQHmKzQbEa';
     private _consumerSecret: string = 'EVLWUbtbwi1zXLaMr3j3ixmvRgsa';
 
@@ -50,5 +52,17 @@ export class RestaurantApiService {
         });
             
         return this.http.get(this._restaurantsUrl, requestOptions).map(res => res.json());
+    }
+
+    callLunchService(id: number) {
+        let headers: Headers = new Headers();
+        headers.append('Authorization', 'Bearer ' + this._accessToken);
+        
+        let requestOptions: RequestOptions = new RequestOptions({
+          headers: headers,
+          method: 'GET'
+        });
+    
+        return this.http.get(this._lunchMenuUrl + id.toString(), requestOptions).map(res => res.json());
     }
 }
