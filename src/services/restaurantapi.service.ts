@@ -5,16 +5,27 @@ import { Observable } from 'rxjs/Observable';
 @Injectable()
 export class RestaurantApiService {
 
-    private _restaurantsUrl: string = 'https://api.integration.devtest.aws.scania.com/lunch/1.0/restaurants';
-    private _lunchMenuUrl: string = 'https://api.integration.devtest.aws.scania.com/lunch/1.0/lunch/';
-    private _tokenUrl: string = 'https://api.integration.devtest.aws.scania.com/token';
+    // Scania VPC
+    private _baseUrl: string = 'https://api.integration.devtest.aws.scania.com/';
+    private _tokenUrl: string = this._baseUrl + 'token';
+    private _consumerKey: string = 'BYKd6gLVf0vy99_Aq6Sz1fVhz_Ma';
+    private _consumerSecret: string = 'XcjcqukTateews60ffFVGKcnTfsa';
 
-    private _consumerKey: string = '*******';
-    private _consumerSecret: string = '*******';
+    // Failover API GW
+    // private _baseUrl: string = 'https://gateway.api.cloud.wso2.com:443/t/kallekulaab/';
+    // private _tokenUrl: string = 'https://gateway.api.cloud.wso2.com:443/token';
+    // private _consumerKey: string = 'gUxB69HBWKFMGIbWSJXgvT3ktUQa';
+    // private _consumerSecret: string = 'zHizQUHplaxfZ78trVjTB_FoCi4a';
 
+    // General
+    private _restaurantsUrl: string = this._baseUrl + 'demolunch/1.0.0/restaurants';
+    private _lunchMenuUrl: string = this._baseUrl + 'demolunch/1.0.0/lunch/';
+    
     private _accessToken: string;
 
     public isAuthorized: EventEmitter<boolean> = new EventEmitter<boolean>();
+
+    private _isDebug: boolean = false;
 
     constructor(private http: Http) {
         this.getAccessToken(this._consumerKey, this._consumerSecret);
@@ -35,6 +46,7 @@ export class RestaurantApiService {
           body: dataString
         });
     
+
         return this.http.post(this._tokenUrl, dataString, requestOptions).map(res => res.json()).subscribe(data => {
             this._accessToken = data.access_token;
 
@@ -45,7 +57,10 @@ export class RestaurantApiService {
     callRestaurantEndpoint() {
         let headers: Headers = new Headers();
         headers.append('Authorization', 'Bearer ' + this._accessToken);
-    
+        
+        if (this._isDebug)
+            headers = null;
+
         let requestOptions: RequestOptions = new RequestOptions({
             headers: headers,
             method: 'GET'
@@ -58,6 +73,9 @@ export class RestaurantApiService {
         let headers: Headers = new Headers();
         headers.append('Authorization', 'Bearer ' + this._accessToken);
         
+        if (this._isDebug)
+            headers = null;
+
         let requestOptions: RequestOptions = new RequestOptions({
           headers: headers,
           method: 'GET'
