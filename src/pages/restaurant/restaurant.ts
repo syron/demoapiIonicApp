@@ -13,14 +13,17 @@ export class RestaurantPage {
   name: string;
   restaurantId: number = null;
   menu: any = null;
+  isLoading: boolean = false;
 
   constructor(private navParams: NavParams, public navCtrl: NavController, private http: Http, public restaurantApiService: RestaurantApiService) {
     this.name = this.navParams.get('name');
     this.restaurantId = this.navParams.get('restaurantId');
 
+    this.isLoading = true;
     this.restaurantApiService.isAuthorized.subscribe(data => {
       this.restaurantApiService.callLunchService(this.restaurantId).subscribe(data => {
         this.menu = data;
+        this.isLoading = false;
       });
     });
   }
