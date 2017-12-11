@@ -14,13 +14,17 @@ import { RestaurantApiService } from '../../services/restaurantapi.service';
 })
 export class HomePage {
   restaurants: any = null;
+  isLoading: boolean = false;
 
   constructor(public navCtrl: NavController, private http: Http, public restaurantApiService: RestaurantApiService) {
+
+    this.isLoading = true;
     this.restaurantApiService.isAuthorized.subscribe(data => {
       this.restaurantApiService.callRestaurantEndpoint().subscribe(data => {
         this.restaurants = data;
+        this.isLoading = false;
       });
-    });    
+    });
   }
 
   restaurantChosen(id, name) {

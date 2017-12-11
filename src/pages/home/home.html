@@ -8,30 +8,31 @@
 </ion-header>
 
 <ion-content>
-   
-    <ion-list>
-      <button ion-item *ngFor="let restaurant of restaurants" (click)="restaurantChosen(restaurant.id, restaurant.displayName)">
-        {{ restaurant.displayName }}
-      </button> 
-    </ion-list>
-    <!-- <ion-item-group>
-      <div *ngFor="let week of menu.Weeks">
-        <ion-item-divider color="light">Week <b>{{week.WeekNumber}}</b></ion-item-divider>
-        <div *ngFor="let day of week.Days; let i = index">
+  <ion-spinner *ngIf="isLoading" name="crescent"></ion-spinner>
 
-          <ion-item>
-            <span *ngIf="i == 0"><b>Monday ({{day.DayMenuDate}})</b></span>
-            <span *ngIf="i == 1"><b>Tuesday ({{day.DayMenuDate}})</b></span>
-            <span *ngIf="i == 2"><b>Wednesday ({{day.DayMenuDate}})</b></span>
-            <span *ngIf="i == 3"><b>Thursday ({{day.DayMenuDate}})</b></span>
-            <span *ngIf="i == 4"><b>Friday ({{day.DayMenuDate}})</b></span>
+  <ion-list>
+    <button ion-item *ngFor="let restaurant of restaurants" (click)="restaurantChosen(restaurant.id, restaurant.displayName)">
+      {{ restaurant.displayName }}
+    </button> 
+  </ion-list>
+  <!-- <ion-item-group>
+    <div *ngFor="let week of menu.Weeks">
+      <ion-item-divider color="light">Week <b>{{week.WeekNumber}}</b></ion-item-divider>
+      <div *ngFor="let day of week.Days; let i = index">
 
-            <p *ngFor="let dayMenu of day.DayMenus">
-              <b>{{dayMenu.MenuAlternativeName}}</b>:<br />{{dayMenu.MenuPresentation.DayMenuName}}
-            </p>
-          </ion-item>
+        <ion-item>
+          <span *ngIf="i == 0"><b>Monday ({{day.DayMenuDate}})</b></span>
+          <span *ngIf="i == 1"><b>Tuesday ({{day.DayMenuDate}})</b></span>
+          <span *ngIf="i == 2"><b>Wednesday ({{day.DayMenuDate}})</b></span>
+          <span *ngIf="i == 3"><b>Thursday ({{day.DayMenuDate}})</b></span>
+          <span *ngIf="i == 4"><b>Friday ({{day.DayMenuDate}})</b></span>
 
-        </div>
+          <p *ngFor="let dayMenu of day.DayMenus">
+            <b>{{dayMenu.MenuAlternativeName}}</b>:<br />{{dayMenu.MenuPresentation.DayMenuName}}
+          </p>
+        </ion-item>
+
       </div>
-    </ion-item-group> -->
+    </div>
+  </ion-item-group> -->
 </ion-content>
